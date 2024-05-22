@@ -960,8 +960,9 @@ blockquote p {
 	background-color: #e74c3c;
 }
 
-.qa-a-count-selected {
+.qa-a-count-selected, .qa-related-q-item-stats.qa-a-count-selected {
 	background-color: #27ae60;
+	color: #fff;
 }
 
 @media (max-width: 799px) {
@@ -2956,17 +2957,24 @@ input[type="submit"], button {
 	list-style: none;
 }
 
-.qa-related-q-item a {
-	display: block;
+.qa-related-q-item {
+	display: flex;
 	padding: 5px 0;
 	border-bottom: 1px solid #e0e0e0;
 }
-.qa-related-q-item:first-child a {
-	padding-top: 0;
+.qa-related-q-item:last-child {
+	border-bottom: none;
 }
-.qa-related-q-item:last-child a {
-	padding-bottom: 0;
-	border-bottom: 0;
+.qa-related-q-item-stats {
+	flex-shrink: 0;
+	background-color: #ecf0f1;
+	width: 30px;
+	height: 24px;
+	vertical-align: top;
+	text-align: center;
+	margin-top: 2px;
+	margin-inline-end: .6rem;
+	border-radius: 3px;
 }
 
 .qa-nav-cat {
