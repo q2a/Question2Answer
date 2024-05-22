@@ -820,7 +820,7 @@ div.header-banner {
 	border: 1px solid #ffd196;
 }
 
-.qa-a-count-selected {
+.qa-a-count-selected, .qa-related-q-item-stats.qa-a-count-selected {
 	background: #d9f5bb;
 	border: 1px solid #c1daa6;
 }
@@ -2307,10 +2307,22 @@ a.qa-browse-cat-link:visited {
 }
 
 .qa-related-q-item {
+	display: flex;
 	margin: 0;
 	padding: 5px 0;
 	border-top: 1px solid #fafafa;
 	border-bottom: 1px solid #ddd;
+}
+.qa-related-q-item-stats {
+	flex-shrink: 0;
+	background-color: #ecf0f1;
+	width: 28px;
+	height: 21px;
+	vertical-align: top;
+	text-align: center;
+	margin-top: 2px;
+	margin-inline-end: .6rem;
+	border-radius: 3px;
 }
 
 .qa-related-q-item:first-child {
