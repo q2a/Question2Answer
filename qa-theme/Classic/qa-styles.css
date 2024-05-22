@@ -425,7 +425,27 @@ h2 {font-size:16px; padding-top:12px; clear:both;}
 /* Related questions and activity count widgets */
 
 .qa-related-q-list {list-style-type:none; padding:0;}
-.qa-related-q-item {margin:0.5em 0; word-wrap: break-word;}
+.qa-related-q-item {
+	display: flex;
+	padding: 5px 0;
+	word-wrap: break-word;
+	border-bottom: 1px solid #e0e0e0;
+}
+.qa-related-q-item-stats {
+    flex-shrink: 0;
+	background-color: #ecf0f1;
+    width: 28px;
+    height: 18px;
+    vertical-align: top;
+    text-align: center;
+	margin-top: 2px;
+    margin-inline-end: .6rem;
+    border-radius: 3px;
+}
+.qa-related-q-item .qa-a-count-selected {
+    background-color: #27ae60;
+    color: #fff;
+}
 .qa-activity-count {font-size:150%;}
 .qa-activity-count-item {margin:0.25em 0;}
 .qa-activity-count-data {font-weight:bold;}
