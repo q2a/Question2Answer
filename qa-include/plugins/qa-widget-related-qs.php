@@ -67,7 +67,7 @@ class qa_related_qs
 			foreach ($questions as $question) {
 				$selectedClass = isset($question['selchildid']) ? ' qa-a-count-selected' : '';
 				$qaLangAnswers = ($question['acount'] == 1) ? qa_lang_html_sub('main/1_answer', '1')
-					: qa_lang_html_sub('main/x_answers', qa_format_number($question['acount']));
+					: qa_lang_html_sub('main/x_answers', $question['acount']);
 
 				$themeobject->output(
 					'<li class="qa-related-q-item">' .
