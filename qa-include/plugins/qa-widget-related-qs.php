@@ -65,8 +65,13 @@ class qa_related_qs
 			$themeobject->output('<ul class="qa-related-q-list">');
 
 			foreach ($questions as $question) {
+				$selectedClass = isset($question['selchildid']) ? ' qa-a-count-selected' : '';
+				$qaLangAnswers = ($question['acount'] == 1) ? qa_lang_html_sub('main/1_answer', '1')
+					: qa_lang_html_sub('main/x_answers', $question['acount']);
+
 				$themeobject->output(
 					'<li class="qa-related-q-item">' .
+					'<span class="qa-related-q-item-stats'. $selectedClass .'" title="'.$qaLangAnswers.'">' . qa_html($question['acount']) . '</span>' .
 					'<a href="' . qa_q_path_html($question['postid'], $question['title']) . '">' .
 					qa_html($question['title']) .
 					'</a>' .
