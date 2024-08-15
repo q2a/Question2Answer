@@ -9,19 +9,6 @@
 */
 
 
-.clearfix, .qa-q-item-clear,
-.qa-nav-main-list, .qa-nav-sub,
-.qa-page-links, .qa-page-links-list,
-.qa-template-admin .qa-message-buttons,
-.qa-q-item-avatar-meta, .qa-message-item,
-.qa-q-view, .qa-part-q-view, .qa-q-view-content, .qa-q-view-buttons, .qa-part-form-q-edit,
-.qa-a-list-item, .qa-a-item-buttons, .qa-a-item-content,
-.qa-c-item-buttons, .qa-c-item-clear,
-.qam-footer-row, .qam-qa-list-meta-box,
-.qa-nav-footer-list, .qa-footer-clear {
-	*zoom: 1;
-}
-
 .qa-main:after, .qa-main-wrapper:after, .qa-body-wrapper:after, .qa-sidepanel:after,
 .clearfix:after, .qa-q-item-clear:after,
 .qa-nav-main-list:after, .qa-nav-sub:after,
@@ -68,8 +55,6 @@ html {
 }
 
 * {
-	-moz-box-sizing: border-box;
-	-webkit-box-sizing: border-box;
 	box-sizing: border-box;
 }
 
@@ -601,9 +586,6 @@ blockquote p {
 }
 
 @media (max-width: 979px) {
-	.qa-nav-sub-list {
-		*zoom: 1;
-	}
 	.qa-nav-sub-list:before, .qa-nav-sub-list:after {
 		content: "";
 		display: table;
@@ -818,14 +800,9 @@ blockquote p {
 
 /*------[ qa content parts ]------*/
 
-.qa-main, .qa-main-wrapper {
-	*zoom: 1;
-}
-
 .qa-body-wrapper {
 	margin: 10px auto;
 	padding: 0 10px;
-	*zoom: 1;
 }
 
 @media (min-width: 980px) {
@@ -1794,7 +1771,7 @@ input[type="submit"], button {
 }
 
 .qa-form-tall-button, .qa-form-wide-button, .qa-form-basic-button {
-	-webkit-appearance: none;
+	appearance: none;
 	padding: 10px 15px;
 	border: 0;
 	font-size: 14px;
@@ -1955,7 +1932,8 @@ input[type="submit"], button {
 }
 
 .qa-part-form-profile .qa-form-wide-data {
-	word-break: break-word;
+	word-break: normal;
+	overflow-wrap: anywhere;
 }
 .qa-part-form-profile .qa-form-tall-image {
 	text-align: center;
@@ -2093,7 +2071,7 @@ input[type="submit"], button {
 
 /*------[ q-view ]------*/
 .qa-form-light-button {
-	-webkit-appearance: none;
+	appearance: none;
 	display: block;
 	float: right;
 	margin: 0 0 0 5px;
@@ -2213,7 +2191,8 @@ input[type="submit"], button {
 	width: 100%;
 	height: auto;
 	margin: 6px 0 -4px;
-	word-break: break-word;
+	word-break: normal;
+	overflow-wrap: anywhere;
 }
 
 .qa-view-count-data {
@@ -2401,7 +2380,6 @@ input[type="submit"], button {
 }
 /* highlight selected answer */
 .qa-a-list-item:target{
-    -webkit-animation: answer-highlight 2s ease-in-out;
     animation: answer-highlight 2s ease-in-out;
 }
 
@@ -2544,7 +2522,6 @@ input[type="submit"], button {
 }
 /* highlight selected comment */
 .qa-c-list-item:target {
-    -webkit-animation: comment-highlight 2s ease-in-out;
     animation: comment-highlight 2s ease-in-out;
 }
 
@@ -2796,7 +2773,6 @@ input[type="submit"], button {
 		width: 25%;
 		padding: 0;
 		float: right;
-		*zoom: 1;
 	}
 }
 
@@ -2914,7 +2890,6 @@ input[type="submit"], button {
 	margin: -20px;
 	text-align: center;
 	overflow: hidden;
-	*zoom: 1;
 }
 
 .qa-activity-count-item {
@@ -2942,7 +2917,6 @@ input[type="submit"], button {
 }
 .qa-activity-count-item:hover:before {
 	opacity: 1;
-	-webkit-animation: shake 0.25s;
 	animation: shake 0.25s;
 }
 .qa-activity-count-item:nth-child(1) {
@@ -3328,15 +3302,6 @@ input[type="submit"], button {
 	}
 }
 
-@-webkit-keyframes shake {
-	0% { transform: scale(1); }
-	17% { transform: scale(1.5); }
-	34% { transform: scale(0.8); }
-	51% { transform: scale(1.1); }
-	68% { transform: scale(0.9); }
-	85% { transform: scale(1.05); }
-	100% { transform: scale(1); }
-}
 @keyframes shake {
 	0% { transform: scale(1); }
 	17% { transform: scale(1.5); }
@@ -3347,19 +3312,11 @@ input[type="submit"], button {
 	100% { transform: scale(1); }
 }
 
-@-webkit-keyframes answer-highlight {
-    0% { background-color: #ffffaa; }
-    100% { background-color: #fff; }
-}
 @keyframes answer-highlight {
     0% { background-color: #ffffaa; }
     100% { background-color: #fff; }
 }
 
-@-webkit-keyframes comment-highlight {
-    0% { background-color: #ffffaa; }
-    100% { background-color: #f4f4f4; }
-}
 @keyframes comment-highlight {
     0% { background-color: #ffffaa; }
     100% { background-color: #f4f4f4; }
@@ -3380,7 +3337,6 @@ input[type="submit"], button {
 	font-family: "fontello";
 	font-style: normal;
 	font-weight: normal;
-	speak: none;
 	display: inline-block;
 	text-decoration: inherit;
 	width: 1em;
@@ -3390,9 +3346,6 @@ input[type="submit"], button {
 	text-transform: none;
 	line-height: 1em;
 	margin-left: .2em;
-	/* Font smoothing. That was taken from TWBS */
-	-webkit-font-smoothing: antialiased;
-	-moz-osx-font-smoothing: grayscale;
 }
 
 .icon-chat:before { content: '\e800'; }
