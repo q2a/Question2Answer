@@ -44,7 +44,7 @@ class qa_event_logger
 					'KEY ipaddress (ipaddress),' .
 					'KEY userid (userid),' .
 					'KEY event (event)' .
-					') ENGINE=MyISAM DEFAULT CHARSET=utf8';
+					') ENGINE=MyISAM ' . qa_get_table_charset_collation();
 			} else {
 				// table exists: check it has the correct schema
 				$column = qa_db_read_one_assoc(qa_db_query_sub('SHOW COLUMNS FROM ^eventlog WHERE Field="ipaddress"'));

@@ -94,8 +94,15 @@ function qa_db_connect($failhandler = null)
 	// From Q2A 1.5, we explicitly set the character encoding of the MySQL connection, instead of using lots of "SELECT BINARY col"-style queries.
 	// Testing showed that overhead is minimal, so this seems worth trading off against the benefit of more straightforward queries, especially
 	// for plugin developers.
-	if (!$db->set_charset('utf8'))
+	if ($db->set_charset(QA_MYSQL_CHARSET)) {
+		$sql = 'SET NAMES ' . QA_MYSQL_CHARSET;
+		if (QA_MYSQL_COLLATION !== null) {
+			$sql .= ' COLLATE ' . QA_MYSQL_COLLATION;
+		}
+		$db->query($sql);
+	} else {
 		qa_db_fail_error('set_charset', $db->errno, $db->error);
+	}
 
 	qa_report_process_stage('db_connected');
 
@@ -174,6 +181,23 @@ function qa_db_disconnect()
 	}
 }
 
+/**
+ * Return the default charset and collation string to use in CREATE TABLE statements. For fields that
+ * have not been set an implicit charset or collation, these values will be assigned at creation time.
+ * Collation might be null to provide backwards compatibility with Q2A 1.8.6 and before.
+ * @param string $charset
+ * @param string $collation
+ * @return string
+ */
+function qa_get_table_charset_collation($charset = QA_MYSQL_CHARSET, $collation = QA_MYSQL_COLLATION)
+{
+	$sql = 'DEFAULT CHARACTER SET ' . $charset;
+	if ($collation !== null) {
+		$sql .= ' COLLATE ' . $collation;
+	}
+
+	return $sql;
+}
 
 /**
  * Run the raw $query, call the global failure handler if necessary, otherwise return the result resource.
