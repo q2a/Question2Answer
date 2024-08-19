@@ -1218,7 +1218,7 @@ function qa_db_tag_recent_qs_selectspec($voteuserid, $tag, $start, $full = false
 	$selectspec = qa_db_posts_basic_selectspec($voteuserid, $full);
 
 	// use two tests here - one which can use the index, and the other which narrows it down exactly - then limit to 1 just in case
-	$selectspec['source'] .= " JOIN (SELECT postid FROM ^posttags WHERE wordid=(SELECT wordid FROM ^words WHERE word=$ AND word=$ COLLATE utf8_bin LIMIT 1) ORDER BY postcreated DESC LIMIT #,#) y ON ^posts.postid=y.postid";
+	$selectspec['source'] .= " JOIN (SELECT postid FROM ^posttags WHERE wordid=(SELECT wordid FROM ^words WHERE word=$ AND word=$ LIMIT 1) ORDER BY postcreated DESC LIMIT #,#) y ON ^posts.postid=y.postid";
 	array_push($selectspec['arguments'], $tag, qa_strtolower($tag), $start, $count);
 	$selectspec['sortdesc'] = 'created';
 
@@ -1235,7 +1235,7 @@ function qa_db_tag_word_selectspec($tag)
 {
 	return array(
 		'columns' => array('wordid', 'word', 'tagcount'),
-		'source' => '^words WHERE word=$ AND word=$ COLLATE utf8_bin',
+		'source' => '^words WHERE word=$ AND word=$',
 		'arguments' => array($tag, qa_strtolower($tag)),
 		'single' => true,
 	);

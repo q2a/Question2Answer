@@ -49,9 +49,17 @@
 	5. Place all the Question2Answer files on your server.
 	6. Open the appropriate URL, and follow the instructions.
 
-	More detailed installation instructions here: http://www.question2answer.org/
+	More detailed installation instructions here: https://www.question2answer.org
 */
 
+
+/*
+	The QA_MYSQL_CHARSET and QA_MYSQL_COLLATION define the charset and collation used by Q2A to
+	connect to the server, and to create tables and fields.
+*/
+
+	define('QA_MYSQL_CHARSET', 'utf8mb4');
+	define('QA_MYSQL_COLLATION', 'utf8mb4_unicode_ci');
 /*
 	======================================================================
 	 OPTIONAL CONSTANT DEFINITIONS, INCLUDING SUPPORT FOR SINGLE SIGN-ON

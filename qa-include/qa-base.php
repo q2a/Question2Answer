@@ -313,6 +313,13 @@ function qa_initialize_constants_2()
 		define('QA_FINAL_MYSQL_PORT', QA_MYSQL_PORT);
 	}
 
+	if (!defined('QA_MYSQL_CHARSET')) {
+		define('QA_MYSQL_CHARSET', 'utf8'); // Use hardcoded default until v1.8.8
+	}
+	if (!defined('QA_MYSQL_COLLATION')) {
+		define('QA_MYSQL_COLLATION', null); // Use hardcoded default until v1.8.8
+	}
+
 	// Possible URL schemes for Q2A and the string used for url scheme testing
 
 	define('QA_URL_FORMAT_INDEX', 0);  // http://...../index.php/123/why-is-the-sky-blue
