@@ -270,12 +270,12 @@ foreach ($allProcessesKeys as $processKey) {
 		'buttons' => [
 			$processKey . '_restart' => [
 				'label' => $allProcesses[$processKey]['serverProcessPending'] ? qa_html($qa_langs['process_restart']) : qa_html($qa_langs['process_start']),
-				'tags' => sprintf('id="%s" name="%s" onclick="return qa_recalc_click(this.name, {forceRestart: true})"', $processKey, $processKey),
+				'tags' => sprintf('id="%s" name="%s" onclick="return qa_recalc_click(this.name, processOptionsRestart)"', $processKey, $processKey),
 			],
 			$processKey . '_continue' => [
 				'label' => qa_lang_html('admin/process_continue'),
 				'tags' => sprintf(
-					'id="%s_continue" name="%s_continue" data-process="%s" onclick="return qa_recalc_click(this.dataset.process)"%s',
+					'id="%s_continue" name="%s_continue" data-process="%s" onclick="return qa_recalc_click(this.dataset.process, processOptionsContinue)"%s',
 					$processKey,
 					$processKey,
 					$processKey,
@@ -301,6 +301,8 @@ $qa_content['script_lines'][] = [
 	'        }',
 	'    }',
 	'};',
+	'const processOptionsRestart = { forceRestart: true };',
+	'const processOptionsContinue = {};',
 ];
 
 $qa_content['script_onloads'][] = [

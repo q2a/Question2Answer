@@ -22,7 +22,7 @@
 const qa_recalcProcesses = new Map();
 
 window.onbeforeunload = event => {
-	for (let [processKey, process] of qa_recalcProcesses.entries()) {
+	for (const [processKey, process] of qa_recalcProcesses.entries()) {
 		if (process.clientRunning) {
 			event.preventDefault();
 			event.returnValue = true;
@@ -31,8 +31,12 @@ window.onbeforeunload = event => {
 };
 
 /**
- * @param {String} processKey
- * @param {object} options - See keys and default values below
+ * @param {string} processKey
+ * @param {Object} options - Object used to configure the process
+ * @param {boolean} [options.forceRestart = false] - Whether the click has to trigger a restart of the process
+ * @param {boolean} [options.requiresServerTracking = true] - Whether the process is expected to be stopped and resumed
+ * @param {(process: object) => void} [options.callbackStart] - Callback run when the process is started
+ * @param {(process: object, hasFinished: boolean) => void} [options.callbackStop] - Callback run when the process is stopped
  * @returns {boolean}
  */
 function qa_recalc_click(processKey, options = {})
@@ -40,8 +44,6 @@ function qa_recalc_click(processKey, options = {})
 	options = {
 		forceRestart: false,
 		requiresServerTracking: true,
-		callbackStart: process => {},
-		callbackStop: hasFinished => {},
 		...options,
 	};
 
@@ -61,6 +63,8 @@ function qa_recalc_click(processKey, options = {})
 			"statusLabel": statusLabel,
 			"clientRunning": true,
 			"stopRequest": false,
+			"startListeners": options.callbackStart ? [options.callbackStart] : [],
+			"stopListeners": options.callbackStop ? [options.callbackStop] : [],
 			"options": options
 		};
 
@@ -71,7 +75,7 @@ function qa_recalc_click(processKey, options = {})
 		statusLabel.innerHTML = qa_langs.please_wait;
 		startButton.value = qa_langs.process_stop;
 
-		process.options.callbackStart(process);
+		process.startListeners.forEach(listener => listener(process));
 
 		qa_recalc_update(process);
 	}
@@ -127,7 +131,7 @@ function qa_recalc_cleanup(process, hasFinished = false, message = null)
 {
 	process.clientRunning = false;
 
-	process.options.callbackStop(hasFinished);
+	process.stopListeners.forEach(listener => listener(process, hasFinished));
 
 	if (process.options.requiresServerTracking && process.serverProcessPending) {
 		process.startButton.value = qa_langs.process_restart;

@@ -1827,7 +1827,7 @@ switch ($adminsection) {
 
 		$qa_content['script_lines'][] = [
 			sprintf('const qa_langs = %s;', json_encode($qa_langs)),
-			'const cachingProcessOptions = {',
+			'const processOptions = {',
 			'    forceRestart: true,',
 			'    requiresServerTracking: false,',
 			'    callbackStart: process => document.getElementById(\'process_type_select\').disabled = true,',
@@ -1838,8 +1838,8 @@ switch ($adminsection) {
 		$qa_content['script_onloads'][] = [
 			'const processTypeSelect = document.getElementById(\'process_type_select\');',
 			'processTypeSelect.addEventListener(\'change\', event => {',
-			'    document.querySelector(\'[data-caching_button_id="caching_button"]\').id = event.target.value;' .
-			'    document.querySelector(\'[data-caching_status_id="caching_status"]\').id = event.target.value + \'_status\';' .
+			'    document.querySelector(\'[data-caching_button_id="caching_button"]\').id = event.target.value;',
+			'    document.querySelector(\'[data-caching_status_id="caching_status"]\').id = event.target.value + \'_status\';',
 			'});',
 		];
 
@@ -1880,7 +1880,7 @@ switch ($adminsection) {
 			'buttons' => [
 				'caching_process' => [
 					'label' => qa_lang_html('admin/process_start'),
-					'tags' => 'id="cache_trim" data-caching_button_id="caching_button" onclick="return qa_recalc_click(this.id, cachingProcessOptions);"',
+					'tags' => 'id="cache_trim" data-caching_button_id="caching_button" onclick="return qa_recalc_click(this.id, processOptions);"',
 				],
 			],
 
